@@ -1,0 +1,49 @@
+{
+	"name": "cloudfunctions",
+	"version": "0.0.1",
+	"deprecated": false,
+	"description": "Senti Cloud Functions service",
+	"main": "server.js",
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/senti-iot/senti-cloudfunctions.git"
+	},
+	"keywords": [
+		"Senti.Cloud",
+		"Senti.IoT",
+		"Senti",
+		"IoT",
+		"Cloud Functions",
+		"Serverless",
+		"Lambda",
+		"NodeJS",
+		"Express",
+		"Micro Service"
+	],
+	"author": {
+		"name": "Christian Broberg",
+		"email": "apisupport@senti.cloud",
+		"url": "https://senti.io/"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/senti-iot/senti-cloudfunctions/issues"
+	},
+	"homepage": "https://github.com/senti-iot/senti-cloudfunctions#readme",
+	"dependencies": {
+		"apisauce": "^1.0.2",
+		"cors": "^2.8.5",
+		"dotenv": "^8.0.0",
+		"express": "^4.16.4",
+		"express-pino-logger": "^4.0.0",
+		"find-config": "^1.0.0",
+		"helmet": "^3.18.0",
+		"moment": "^2.24.0",
+		"mqtt": "^2.18.8",
+		"mysql": "^2.17.1",
+		"mysql2": "^1.6.5",
+		"pino": "^5.12.5",
+		"senti-apicore": "0.0.17"
+	}
+}
