@@ -1,0 +1,21 @@
+[Unit]
+# senti-cloudfunctions-dev.service
+Description=Senti cloudfunctions
+Documentation=https://github.com/senti-iot/senti-cloudfunctions/blob/master/README.md
+# After=network.target
+
+[Service]
+WorkingDirectory=/srv/nodejs/senti/services/cloudfunctions/development
+ExecStart=/usr/bin/node server.js
+Environment=NODE_PORT=3012
+Environment=NODE_ENV=development
+Type=simple
+Restart=always
+# RestartSec=1
+StartLimitInterval=0
+User=root
+Group=root
+# KillSignal=SIGQUIT
+
+[Install]
+WantedBy=basic.target
