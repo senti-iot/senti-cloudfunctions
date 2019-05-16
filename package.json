@@ -1,6 +1,6 @@
 {
 	"name": "cloudfunctions",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"deprecated": false,
 	"description": "Senti Cloud Functions service",
 	"main": "server.js",
@@ -34,7 +34,7 @@
 	"dependencies": {
 		"apisauce": "^1.0.2",
 		"cors": "^2.8.5",
-		"dotenv": "^8.0.0",
+		"dotenv": "^6.2.0",
 		"express": "^4.16.4",
 		"express-pino-logger": "^4.0.0",
 		"find-config": "^1.0.0",
