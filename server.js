@@ -19,7 +19,7 @@ app.use(cors())
 
 const startServer = () => {
 	app.listen(port, () => {
-		console.log('Senti.Cloud API server started on port', port)
+		console.log('Senti Cloud Functions server started on port', port)
 	}).on('error', (err) => {
 		if (err.errno === 'EADDRINUSE') {
 			console.log('Server not started, port ' + port + ' is busy')

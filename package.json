@@ -2,7 +2,7 @@
 	"name": "cloudfunctions",
 	"version": "0.0.2",
 	"deprecated": false,
-	"description": "Senti Cloud Functions service",
+	"description": "Senti Cloud Functions Server",
 	"main": "server.js",
 	"scripts": {},
 	"repository": {
