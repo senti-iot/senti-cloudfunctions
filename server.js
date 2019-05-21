@@ -10,8 +10,8 @@ const app = express()
 
 // module.exports.logger=pino(pino.destination(`/var/log/nodejs/databroker/${new Date().toLocaleDateString().replace(/\//g, '-')}-others.json`))
 
-const logger=pino(pino.destination(`/var/log/nodejs/senti-engine/${new Date().toLocaleDateString().replace(/\//g, '-')}.json`))
-module.exports.logger = pino(pino.extreme(`/var/log/nodejs/senti-engine/${new Date().toLocaleDateString().replace(/\//g, '-')}-others.json`))
+const logger=pino(pino.destination(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}.json`))
+module.exports.logger = pino(pino.extreme(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}-others.json`))
 const expressPino = require('express-pino-logger')({
 	logger: logger
 })
