@@ -8,8 +8,6 @@ const app = express()
 
 // module.exports.logger = console
 
-// module.exports.logger=pino(pino.destination(`/var/log/nodejs/databroker/${new Date().toLocaleDateString().replace(/\//g, '-')}-others.json`))
-
 const logger=pino(pino.destination(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}.json`))
 module.exports.logger = pino(pino.extreme(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}-others.json`))
 const expressPino = require('express-pino-logger')({
@@ -27,8 +25,10 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cors())
 
-const functions = require('./api/functions')
-app.use([functions])
+const functions = require('./api/functions/functions')
+const createFunction = require('./api/crud/createFunction')
+const updateFunction = require('./api/crud/updateFunction')
+app.use('/',[functions, createFunction, updateFunction])
 
 //---Start the express server---------------------------------------------------
 
