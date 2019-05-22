@@ -4,7 +4,7 @@ const verifyAPIVersion = require('senti-apicore').verifyapiversion
 const { authenticate } = require('senti-apicore')
 var mysqlConn = require('../../mysql/mysql_handler')
 
-router.post('/:version/edit', async (req, res, next) => {
+router.post('/:version/f', async (req, res, next) => {
 	let apiVersion = req.params.version
 	let authToken = req.headers.auth
 

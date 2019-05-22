@@ -6,14 +6,14 @@ const helmet = require('helmet')
 const pino = require('pino')
 const app = express()
 
-// module.exports.logger = console
+module.exports.logger = console
 
-const logger=pino(pino.destination(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}.json`))
-module.exports.logger = pino(pino.extreme(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}-others.json`))
-const expressPino = require('express-pino-logger')({
-	logger: logger
-})
-app.use(expressPino)
+// const logger=pino(pino.destination(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}.json`))
+// module.exports.logger = pino(pino.extreme(`/var/log/nodejs/cloudfunctions/${new Date().toLocaleDateString().replace(/\//g, '-')}-others.json`))
+// const expressPino = require('express-pino-logger')({
+// 	logger: logger
+// })
+// app.use(expressPino)
 
 // API endpoint imports
 
@@ -27,8 +27,10 @@ app.use(cors())
 
 const functions = require('./api/functions/functions')
 const createFunction = require('./api/crud/createFunction')
+const getFunction = require('./api/crud/getFunction')
+const getFunctions = require('./api/crud/getFunctions')
 const updateFunction = require('./api/crud/updateFunction')
-app.use('/',[functions, createFunction, updateFunction])
+app.use('/',[functions, createFunction, updateFunction, getFunction, getFunctions])
 
 //---Start the express server---------------------------------------------------
 
