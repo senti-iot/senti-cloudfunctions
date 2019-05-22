@@ -30,7 +30,7 @@ const createFunction = require('./api/crud/createFunction')
 const getFunction = require('./api/crud/getFunction')
 const getFunctions = require('./api/crud/getFunctions')
 const updateFunction = require('./api/crud/updateFunction')
-app.use('/',[functions, createFunction, updateFunction, getFunction, getFunctions])
+app.use('/', [createFunction, updateFunction, getFunction, getFunctions, functions])
 
 //---Start the express server---------------------------------------------------
 
