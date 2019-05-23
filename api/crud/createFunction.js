@@ -17,7 +17,7 @@ router.put('/:version/f', async (req, res, next) => {
 			let js = req.body.js
 			let description = req.body.description
 			let type = req.body.type
-			mysqlConn.query(query, [name,js,url,type]).then(rs => {
+			mysqlConn.query(query, [name,js,description,type]).then(rs => {
 				if (rs.insertId !== null || rs.insertId !== undefined) { 
 					console.log(rs)
 					res.status(200).json(rs[0].insertId)
