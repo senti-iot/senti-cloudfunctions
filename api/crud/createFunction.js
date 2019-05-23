@@ -11,11 +11,11 @@ router.put('/:version/f', async (req, res, next) => {
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
 			let query = `INSERT INTO Functions
-				(name, js, url, \`type\`)
+				(name, js, description, \`type\`)
 				VALUES(?, ?, ?, ?)`
 			let name = req.body.name
 			let js = req.body.js
-			let url = req.body.url
+			let description = req.body.description
 			let type = req.body.type
 			mysqlConn.query(query, [name,js,url,type]).then(rs => {
 				if (rs.insertId !== null || rs.insertId !== undefined) { 
