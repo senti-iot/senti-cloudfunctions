@@ -10,19 +10,19 @@ router.post('/:version/f', async (req, res, next) => {
 
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
-			let query = `UPDATE sentidatastorage.functions
+			let query = `UPDATE Functions
 			SET name=?, 
 			js=?, 
-			url=?, 
+			description=?, 
 			\`type\`=?
 			WHERE id=?;
 			`
 			let id = req.body.id
 			let name = req.body.name
 			let js = req.body.js
-			let url = req.body.url
+			let description = req.body.description
 			let type = req.body.type
-			mysqlConn.query(query, [name,js,url,type, id]).then(rs => {
+			mysqlConn.query(query, [name,js,description,type, id]).then(rs => {
 				if (rs.insertId !== null || rs.insertId !== undefined) { 
 					console.log(rs)
 					res.status(200).json(rs[0].info)
