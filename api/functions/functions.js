@@ -7,20 +7,28 @@ var mysqlConn = require('../../mysql/mysql_handler')
 router.post('/:version', async (req, res, next) => {
 	let apiVersion = req.params.version
 	let authToken = req.headers.auth
-
+	let d = req.body
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
+			let nData = d.data
+			for (let i = 0; i < d.nIds.length; i++) {
+				let f = 0
+				const n = d.nIds[i]
 				let query = `SELECT js from Functions where id=?`
-				mysqlConn.query(query, [req.body.nId]).then(rs=> {
+				await mysqlConn.query(query, [n]).then(rs => {
+					// console.log(rs[0][0], n)
 					let func = eval(rs[0][0].js)
-					let data = req.body.data
-					console.log(func(data))
-					res.status(200).json(func(data))
-
+					nData = func(nData)
 				}).catch(err => {
+					f = 1
 					console.log(err)
 					res.status(500).json(err)
 				})
+				if (f === 1) {
+					break
+				}
+			}
+			res.status(200).json(nData)
 		} else {
 			res.status(403).json('Unauthorized Access! 403')
 			console.log('Unauthorized Access!')

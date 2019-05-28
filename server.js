@@ -36,6 +36,7 @@ app.use('/', [createFunction, updateFunction, getFunction, getFunctions, functio
 
 const startServer = () => {
 	app.listen(port, () => {
+		console.clear()
 		console.log('Senti Cloud Functions server started on port', port)
 	}).on('error', (err) => {
 		if (err.errno === 'EADDRINUSE') {
