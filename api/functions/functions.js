@@ -16,9 +16,11 @@ router.post('/:version', async (req, res, next) => {
 				const n = d.nIds[i]
 				let query = `SELECT js from Functions where id=?`
 				await mysqlConn.query(query, [n]).then(rs => {
+					console.log(nData)
 					// console.log(rs[0][0], n)
 					let func = eval(rs[0][0].js)
 					nData = func(nData)
+					console.log(nData)
 				}).catch(err => {
 					crashed = err
 					console.log(err)
