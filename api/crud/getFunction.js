@@ -10,7 +10,9 @@ router.get('/:version/f/:id', async (req, res, next) => {
 	let funcID = req.params.id
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
-			let query = `SELECT * from Functions where id=?`
+			let query = `SELECT f.*, c.ODEUM_org_id as orgId from Functions f
+			INNER JOIN Customer c on c.id = f.customer_id
+			WHERE id=?`
 			await mysqlConn.query(query, [funcID]).then(rs => {
 				if (rs[0][0])
 				{
