@@ -31,7 +31,7 @@ router.post('/:version', async (req, res, next) => {
 				}
 			}
 			if (!crashed)
-				res.status(200).jsonp(nData)
+				res.status(200).json(nData)
 		} else {
 			res.status(403).json('Unauthorized Access! 403')
 			console.log('Unauthorized Access!')
