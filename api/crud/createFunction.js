@@ -4,7 +4,7 @@ const verifyAPIVersion = require('senti-apicore').verifyapiversion
 const { authenticate } = require('senti-apicore')
 var mysqlConn = require('../../mysql/mysql_handler')
 
-const createFunctionQuery = `INSERT INTO Functions (name, js, description, type, customer_id)
+const createFunctionQuery = `INSERT INTO Functions (name, js, description, type, customer_id, deleted)
 			SELECT ?, ?, ?, ?, c.id, 0 from Customer c
 			where c.ODEUM_org_id = ?`
 
