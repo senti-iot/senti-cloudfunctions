@@ -6,7 +6,7 @@ var mysqlConn = require('../../mysql/mysql_handler')
 
 const getFunctionQuery = `SELECT f.*, c.ODEUM_org_id as orgId from Functions f
 			INNER JOIN Customer c on c.id = f.customer_id
-			WHERE f.id=? AND deleted=0`
+			WHERE f.id=? AND f.deleted=0`
 
 router.get('/:version/f/:id', async (req, res, next) => {
 	let apiVersion = req.params.version
