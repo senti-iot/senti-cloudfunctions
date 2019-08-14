@@ -9,7 +9,9 @@ const getFunctionsCIDQuery = `SELECT f.* FROM Functions f
 			INNER JOIN Customer c ON c.id = f.customer_id
 			WHERE c.ODEUM_org_id=? AND f.deleted=0`
 
-const getFunctionsSUQuery = `SELECT f.* FROM Functions f`
+const getFunctionsSUQuery = `SELECT f.*
+							 FROM Functions f
+							 WHERE f.deleted=0`
 
 router.get('/:version/fs', async (req, res, next) => {
 	let apiVersion = req.params.version
