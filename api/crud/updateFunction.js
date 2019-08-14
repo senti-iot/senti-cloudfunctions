@@ -11,7 +11,7 @@ const updateFunctionQuery = `UPDATE Functions as f
 						f.description=?,
 						f.customer_id=c.id,
 						type=?,
-						deleted=0
+						f.deleted=0
 			WHERE f.id=?;
 			`
 
