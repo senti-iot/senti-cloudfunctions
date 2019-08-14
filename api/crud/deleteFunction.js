@@ -4,27 +4,25 @@ const verifyAPIVersion = require('senti-apicore').verifyapiversion
 const { authenticate } = require('senti-apicore')
 var mysqlConn = require('../../mysql/mysql_handler')
 
-const createFunctionQuery = `INSERT INTO Functions (name, js, description, type, customer_id)
-			SELECT ?, ?, ?, ?, c.id, 0 from Customer c
-			where c.ODEUM_org_id = ?`
+const deleteFunctionQuery = `UPDATE Functions as f
+			SET deleted=1
+			WHERE f.id=?;
+			`
 
-router.put('/:version/f', async (req, res, next) => {
+router.post('/:version/delete-f/:id', async (req, res, next) => {
 	let apiVersion = req.params.version
 	let authToken = req.headers.auth
-
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
-			let name = req.body.name
-			let js = req.body.js
-			let description = req.body.description
-			let type = req.body.type
-			let ODEUMid = req.body.orgId
-			mysqlConn.query(createFunctionQuery, [name, js, description, type, ODEUMid]).then(rs => {
-				if (rs.insertId !== null || rs.insertId !== undefined) {
-					console.log(rs)
-					res.status(200).json(rs[0].insertId)
+			let id = req.params.id
+			mysqlConn.query(deleteFunctionQuery, [id]).then(rs => {
+				console.log(rs[0].changedRows)
+				if (rs[0].changedRows > 0) {
+					res.status(200).json(true)
 				}
-
+				else {
+					res.status(404).json(false)
+				}
 			}).catch(err => {
 				console.log(err)
 				res.status(500).json(err)

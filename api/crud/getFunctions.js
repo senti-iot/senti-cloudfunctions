@@ -5,17 +5,21 @@ const verifyAPIVersion = require('senti-apicore').verifyapiversion
 const { authenticate } = require('senti-apicore')
 var mysqlConn = require('../../mysql/mysql_handler')
 
+const getFunctionsCIDQuery = `SELECT f.* FROM Functions f
+			INNER JOIN Customer c ON c.id = f.customer_id
+			WHERE c.ODEUM_org_id=? AND f.deleted=0`
+
+const getFunctionsSUQuery = `SELECT f.* FROM Functions f`
 
 router.get('/:version/fs', async (req, res, next) => {
 	let apiVersion = req.params.version
 	let authToken = req.headers.auth
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
-			let query = `select f.* from Functions f`
-			await mysqlConn.query(query).then(rs => {
-					res.status(200).json(rs[0])
-				}).catch(err => {
-					if(err) {res.status(500).json(err)}
+			await mysqlConn.query(getFunctionsSUQuery).then(rs => {
+				res.status(200).json(rs[0])
+			}).catch(err => {
+				if (err) { res.status(500).json(err) }
 			})
 		} else {
 			res.status(403).json('Unauthorized Access! 403')
@@ -29,17 +33,14 @@ router.get('/:version/fs', async (req, res, next) => {
 router.get('/:version/fs/:customerID', async (req, res, next) => {
 	let apiVersion = req.params.version
 	let authToken = req.headers.auth
-	console.log(req.params.customerID)
-	let customerID = parseInt(req.params.customerID,10)
+	let customerID = parseInt(req.params.customerID, 10)
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
-			let query = `select f.* from Functions f
-			inner join Customer c on c.id = f.customer_id
-			where c.ODEUM_org_id=?`
-			await mysqlConn.query(query,[customerID]).then(rs => {
-					res.status(200).json(rs[0])
-				}).catch(err => {
-					if(err) {res.status(500).json(err)}
+
+			await mysqlConn.query(getFunctionsCIDQuery, [customerID]).then(rs => {
+				res.status(200).json(rs[0])
+			}).catch(err => {
+				if (err) { res.status(500).json(err) }
 			})
 		} else {
 			res.status(403).json('Unauthorized Access! 403')
