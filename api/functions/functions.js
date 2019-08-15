@@ -11,27 +11,34 @@ router.post('/:version', async (req, res, next) => {
 	if (verifyAPIVersion(apiVersion)) {
 		if (authenticate(authToken)) {
 			let nData = d.data
-			let crashed = null
+			let crash = false
 			for (let i = 0; i < d.nIds.length; i++) {
 				const n = d.nIds[i]
 				let query = `SELECT js from Functions where id=?`
 				await mysqlConn.query(query, [n]).then(rs => {
 					console.log(nData)
 					// console.log(rs[0][0], n)
-					let func = eval(rs[0][0].js)
-					nData = func(nData)
-					console.log(nData)
+					try {
+						let func = eval(rs[0][0].js)
+						nData = func(nData)
+						console.log(nData)
+					}
+					catch (err) {
+						console.log(err)
+						let str = err.message.toString()
+						crash = true
+						console.log(str)
+						next(str)
+					}
 				}).catch(err => {
-					crashed = err
-					console.log(err)
+					crash = true
+					next(err)
 				})
-				if (crashed) {
-					res.status(500).json(f)
-					break
-				}
 			}
-			if (!crashed)
+			if (!crash)
 				res.status(200).json(nData)
+			// if (!crashed)
+			// 	res.status(200).json(nData)
 		} else {
 			res.status(403).json('Unauthorized Access! 403')
 			console.log('Unauthorized Access!')

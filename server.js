@@ -5,6 +5,9 @@ const cors = require('cors')
 const helmet = require('helmet')
 const pino = require('pino')
 const app = express()
+var methodOverride = require('method-override')
+
+
 
 module.exports.logger = console
 
@@ -22,8 +25,8 @@ const port = process.env.NODE_PORT || 3011
 app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 app.use(cors())
+app.use(methodOverride())
 
 const functions = require('./api/functions/functions')
 const createFunction = require('./api/crud/createFunction')
@@ -32,7 +35,9 @@ const getFunctions = require('./api/crud/getFunctions')
 const updateFunction = require('./api/crud/updateFunction')
 const deleteFunction = require('./api/crud/deleteFunction')
 app.use([createFunction, updateFunction, getFunction, getFunctions, deleteFunction, functions])
-
+app.use(function (err, req, res, next) {
+	res.status(500).json(err)
+})
 //---Start the express server---------------------------------------------------
 
 const startServer = () => {
