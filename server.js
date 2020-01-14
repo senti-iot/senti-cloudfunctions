@@ -5,7 +5,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const pino = require('pino')
 const app = express()
-var bodyParser = require('body-parser')
+// var bodyParser = require('body-parser')
 
 var methodOverride = require('method-override')
 
@@ -24,9 +24,9 @@ module.exports.logger = console
 
 const port = process.env.NODE_PORT || 3011
 app.use(helmet())
-app.use(bodyParser({ limit: '50mb' }))
+// app.use(bodyParser({ }))
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true, limit: '150mb' }))
 app.use(cors())
 app.use(methodOverride())
 
