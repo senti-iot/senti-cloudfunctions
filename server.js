@@ -48,6 +48,7 @@ const startServer = () => {
 	app.listen(port, () => {
 		console.clear()
 		console.log('Senti Cloud Functions server started on port', port)
+		console.log(process.version);
 	}).on('error', (err) => {
 		if (err.errno === 'EADDRINUSE') {
 			console.log('Server not started, port ' + port + ' is busy')
