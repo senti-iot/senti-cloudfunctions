@@ -14,7 +14,7 @@ router.post('/:version', async (req, res, next) => {
 			let crash = false
 			for (let i = 0; i < d.nIds.length; i++) {
 				const n = d.nIds[i]
-				let query = `SELECT js from Functions where id=?`
+				let query = `SELECT js FROM cloudFunction WHERE id=?`
 				await mysqlConn.query(query, [n]).then(async rs => {
 					// console.log(nData)
 					// console.log(rs[0][0], n)
