@@ -4,9 +4,9 @@ const verifyAPIVersion = require('senti-apicore').verifyapiversion
 const { authenticate } = require('senti-apicore')
 var mysqlConn = require('../../mysql/mysql_handler')
 
-const getFunctionQuery = `SELECT f.*, c.ODEUM_org_id as orgId from Functions f
-			INNER JOIN Customer c on c.id = f.customer_id
-			WHERE f.id=? AND f.deleted=0`
+const getFunctionQuery = `SELECT f.*, o.id as orgId from cloudFunction f
+	INNER JOIN organisation o on o.id = f.orgId
+	WHERE f.id=? AND f.deleted=0`
 
 router.get('/:version/f/:id', async (req, res, next) => {
 	let apiVersion = req.params.version
