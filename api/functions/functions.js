@@ -28,7 +28,7 @@ router.post('/:version', async (req, res, next) => {
 						let str = err.message.toString()
 						crash = true
 						console.log(str)
-						console.log(nData)
+						console.log(n, nData)
 						next(str)
 					}
 				}).catch(err => {
