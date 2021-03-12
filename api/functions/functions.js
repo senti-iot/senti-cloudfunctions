@@ -21,13 +21,14 @@ router.post('/:version', async (req, res, next) => {
 					try {
 						let func = eval(rs[0][0].js)
 						nData = await func(nData)
-						console.log(nData)
+						// console.log(nData)
 					}
 					catch (err) {
 						console.log(err)
 						let str = err.message.toString()
 						crash = true
 						console.log(str)
+						console.log(nData)
 						next(str)
 					}
 				}).catch(err => {
