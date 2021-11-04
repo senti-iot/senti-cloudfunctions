@@ -25,7 +25,9 @@ router.post('/:version', async (req, res, next) => {
 					try {
 						let func = eval(rs[0][0].js)
 						let settings = {
-							cfUUID: rs[0][0].uuid,
+							cf: {
+								"uuid": rs[0][0].uuid
+							},
 							...d.settings 
 						}
 						nData = await func(nData, settings)
