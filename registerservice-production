@@ -24,6 +24,7 @@ if [ ! -e "$service" ]; then
 else 
     echo "Senti Cloud Functions service is already installed"
 	echo "Enabling $service ..."
+	sudo cp $server_dir/$service_name $service_dir/$service_name
 	sudo systemctl enable $service_name
 	sudo systemctl daemon-reload
 	echo "Starting $service ..."
