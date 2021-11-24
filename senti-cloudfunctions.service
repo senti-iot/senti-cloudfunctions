@@ -6,7 +6,7 @@ Documentation=https://github.com/senti-iot/senti-cloudfunctions/blob/master/READ
 
 [Service]
 WorkingDirectory=/srv/nodejs/senti/services/cloudfunctions/production
-ExecStart=/usr/bin/node server.js
+ExecStart=/usr/local/bin/node server.js
 Environment=NODE_PORT=3011
 Environment=NODE_ENV=production
 Type=simple
