@@ -20,8 +20,8 @@ router.post('/:version', async (req, res, next) => {
 				const n = d.nIds[i]
 				let query = `SELECT uuid, js FROM cloudFunction WHERE id = ?`
 				await mysqlConn.query(query, [n]).then(async rs => {
-					console.log(nData)
-					console.log(rs[0][0], n)
+					// console.log(nData)
+					// console.log(rs[0][0], n)
 					try {
 						let func = eval(rs[0][0].js)
 						let settings = {
