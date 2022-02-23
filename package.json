@@ -49,6 +49,6 @@
 		"mysql": "^2.16.0",
 		"mysql2": "^1.6.5",
 		"pino": "^5.12.2",
-		"senti-apicore": "^0.0.57"
+		"senti-apicore": "^0.0.61"
 	}
 }
