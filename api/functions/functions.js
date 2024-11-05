@@ -7,6 +7,8 @@ var mysqlConn = require('../../mysql/mysql_handler')
 const cloudDataService = require('../../lib/cloudFunctionData/cloudFunctionDataService')
 const sentiCloudData = new cloudDataService(mysqlConn)
 
+const sentiCloudRunning = require('../../server').sentiCloudFunctionRunning
+
 router.post('/:version', async (req, res, next) => {
 	let apiVersion = req.params.version
 	let authToken = req.headers.auth

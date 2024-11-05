@@ -9,7 +9,9 @@ const app = express()
 
 var methodOverride = require('method-override')
 
-
+const cloudFunctionRunningService = require('./lib/cloudFunctionData/cloudFunctionRunningService')
+const sentiCloudFunctionRunning = new cloudFunctionRunningService()
+module.exports.sentiCloudFunctionRunning = sentiCloudFunctionRunning
 
 module.exports.logger = console
 
