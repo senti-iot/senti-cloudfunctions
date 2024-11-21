@@ -35,10 +35,10 @@
 	"homepage": "https://github.com/senti-iot/senti-cloudfunctions#readme",
 	"dependencies": {
 		"apisauce": "^2.1.2",
-		"body-parser": "^1.19.0",
+		"body-parser": "^1.20.1",
 		"cors": "^2.8.5",
 		"dotenv": "^6.2.0",
-		"express": "^4.16.4",
+		"express": "^4.18.2",
 		"express-pino-logger": "^4.0.0",
 		"find-config": "^1.0.0",
 		"helmet": "^3.21.2",
